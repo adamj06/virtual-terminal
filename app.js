@@ -5,7 +5,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require('mongoose');
-// WARNING: USE DOTENV
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const app = express();

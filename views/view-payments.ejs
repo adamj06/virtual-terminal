@@ -18,6 +18,19 @@
           </div>
         </form>
       </div>
+    <% } else { %>
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%- payment.billing_details.name %></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%- new Date(payment.created * 1000).toLocaleString() %></h6>
+            <ul class="list-group card-text">
+              <li class="list-group-item">Value: £<%- payment.amount / 100 %></li>
+              <li class="list-group-item"><b>Customer has been refunded.</b></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     <% } %>
   <% }) %>
 </div>
