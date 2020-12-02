@@ -1,0 +1,25 @@
+<%- include("partials/header") -%>
+
+<div class="container">
+  <% payments.data.forEach(function(payment) { %>
+    <% if (payment.amount_refunded !== payment.amount_captured) { %>
+      <div class="container">
+        <form action="/payments/refund" method="post">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%- payment.billing_details.name %></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%- new Date(payment.created * 1000).toLocaleString() %></h6>
+              <ul class="list-group card-text">
+                <li class="list-group-item">Value: £<%- payment.amount / 100 %></li>
+                <li class="list-group-item"><em>Please ensure the customer you're refunding is correct.</em></li>
+                <li class="list-group-item"><button name="charge" type="submit" class="btn btn-danger" value="<%- payment.id %>">Refund</button></li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </div>
+    <% } %>
+  <% }) %>
+</div>
+
+<%- include("partials/footer") -%>

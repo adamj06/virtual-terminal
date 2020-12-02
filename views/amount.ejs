@@ -1,0 +1,14 @@
+<%- include("partials/header") -%>
+
+<div class="container">
+  <h1>New Payment</h1>
+  <form id="payment-form" method="post">
+    <div class="form-group">
+      <label for="paymentAmount">Amount (GBP)</label>
+      <input type="number" min="1" step="any" class="form-control" id="paymentAmount" name="paymentAmount">
+    </div>
+    <button type="submit" class="btn btn-primary">Next</button>
+  </form>
+</div>
+
+<%- include("partials/footer") -%>
