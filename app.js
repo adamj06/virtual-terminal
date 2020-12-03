@@ -21,7 +21,7 @@ app.get("/", function(req, res) {
 })
 
 app.get("/payments/new", function(req, res) {
-  res.render("amount");
+  res.render("amount", { error: false});
 })
 
 app.get("/payments/success", function(req, res) {
@@ -40,6 +40,9 @@ app.get("/payments/view", async(req, res) => {
 })
 
 app.post("/payments/new", async (req, res) => {
+  if (req.body.paymentAmount <= 0 || req.body.paymentAmount > 995000) {
+    res.render("amount", { error: true});
+  }
   const paymentIntent = await stripe.paymentIntents.create({
     amount: req.body.paymentAmount * 100,
     currency: "gbp",
