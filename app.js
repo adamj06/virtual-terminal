@@ -39,6 +39,10 @@ app.get("/payments/view", async(req, res) => {
   res.render("view-payments", { payments: charges });
 })
 
+app.get("/customers/new", function(req, res) {
+  res.render("new-customer");
+})
+
 app.post("/payments/new", async (req, res) => {
   if (req.body.paymentAmount <= 0 || req.body.paymentAmount > 995000) {
     res.render("amount", { error: true});
@@ -56,6 +60,14 @@ app.post("/payments/refund", async (req, res) => {
     reason: "requested_by_customer"
   });
   res.redirect("/payments/view");
+})
+
+app.post("/customers/new", async (req, res) => {
+  const customer = await stripe.customers.create({
+    name: req.body.customerName,
+    email: req.body.customerEmail
+  });
+  res.render("customer-success");
 })
 
 app.use(function (req, res, next) {
