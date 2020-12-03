@@ -9,6 +9,8 @@
           <h6 class="card-subtitle mb-2 text-muted"><%- new Date(customer.created * 1000).toLocaleString() %></h6>
           <ul class="list-group card-text">
             <li class="list-group-item"><b>Email:</b> <%- customer.email %></li>
+            <% console.log("Customer ID: " + customer.id.substring(4)) %>
+            <li class="list-group-item"><a class="btn btn-primary" href="/customers/view/<%- customer.id.substring(4) %>" role="button">View Details</a></li>
           </ul>
         </div>
       </div>

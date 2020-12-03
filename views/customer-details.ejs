@@ -1,0 +1,39 @@
+<%- include("partials/header") -%>
+
+<div class="container">
+  <h1>Customer Details</h1>
+  <ul class="list-group">
+    <li class="list-group-item"><b>Name:</b> <%- customer.name %></li>
+    <li class="list-group-item"><b>Email:</b> <%- customer.email %></li>
+    <li class="list-group-item">
+      <% if (paymentMethods.data.length !== 0) { %>
+        <b>Payment Methods:</b>
+      <% } %>
+      <% paymentMethods.data.forEach(function(paymentMethod) { %>
+        <div class="container">
+          <ul class="list-group">
+            <li class="list-group-item"><b>Card Brand:</b> <%- paymentMethod.card.brand %></li>
+            <li class="list-group-item"><b>Card Number:</b> **** **** **** <%- paymentMethod.card.last4 %></li>
+          </ul>
+        </div>
+      <% }) %>
+      <a class="btn btn-primary" href="/customers/edit/<%- customer.id.substring(4) %>/add-payment-method" role="button">New Payment Method</a>
+    </li>
+    <li class="list-group-item">
+      <% if (paymentMethods.data.length !== 0) { %>
+        <b>Subscriptions:</b>
+      <% } %>
+      <% subscriptions.data.forEach(function(subscription) { %>
+        <div class="container">
+          <ul class="list-group">
+            <li class="list-group-item"><b>Amount:</b> £<%- subscription.items.data[0].price.unit_amount / 100 %></li>
+            <li class="list-group-item"><button name="cancelSubscription" type="submit" class="btn btn-danger" value="<%- subscription.id %>">Cancel</button></li>
+          </ul>
+        </div>
+      <% }) %>
+      <a class="btn btn-primary" href="/customers/edit/<%- customer.id.substring(4) %>/add-subscription" role="button">New Subscription</a>
+    </li>
+  </ul>
+</div>
+
+<%- include("partials/footer") -%>

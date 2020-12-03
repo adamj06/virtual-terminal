@@ -50,6 +50,21 @@ app.get("/customers/view", async(req, res) => {
   res.render("view-customers", { customers: customers });
 })
 
+app.get("/customers/view/:customerID", async(req, res) => {
+  const customer = await stripe.customers.retrieve(
+    "cus_" + req.params.customerID
+  );
+  const paymentMethods = await stripe.paymentMethods.list({
+    customer: "cus_" + req.params.customerID,
+    type: 'card',
+  });
+  const subscriptions = await stripe.subscriptions.list({
+    limit: 25,
+    customer: "cus_" + req.params.customerID
+  });
+  res.render("customer-details", { customer: customer, paymentMethods: paymentMethods, subscriptions: subscriptions });
+})
+
 app.post("/payments/new", async (req, res) => {
   if (req.body.paymentAmount <= 0 || req.body.paymentAmount > 995000) {
     res.render("amount", { error: true});
