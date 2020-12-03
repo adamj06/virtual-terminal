@@ -16,14 +16,22 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/payments/new">New Payment</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="paymentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Payments
+          </a>
+          <div class="dropdown-menu" aria-labelledby="paymentDropdown">
+            <a class="dropdown-item" href="/payments/new">New Payment</a>
+            <a class="dropdown-item" href="/payments/view">View Payments</a>
+          </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/payments/view">View Payments</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/customers/new">New Customer</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="customerDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Customers
+          </a>
+          <div class="dropdown-menu" aria-labelledby="customerDropdown">
+            <a class="dropdown-item" href="/customers/new">New Customer</a>
+          </div>
         </li>
       </ul>
     </div>
