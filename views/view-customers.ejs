@@ -1,0 +1,19 @@
+<%- include("partials/header") -%>
+
+<div class="container">
+  <% customers.data.forEach(function(customer) { %>
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%- customer.name %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%- new Date(customer.created * 1000).toLocaleString() %></h6>
+          <ul class="list-group card-text">
+            <li class="list-group-item"><b>Email:</b> <%- customer.email %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
+<%- include("partials/footer") -%>

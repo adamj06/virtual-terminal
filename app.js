@@ -43,6 +43,13 @@ app.get("/customers/new", function(req, res) {
   res.render("new-customer");
 })
 
+app.get("/customers/view", async(req, res) => {
+  const customers = await stripe.customers.list({
+    limit: 25,
+  });
+  res.render("view-customers", { customers: customers });
+})
+
 app.post("/payments/new", async (req, res) => {
   if (req.body.paymentAmount <= 0 || req.body.paymentAmount > 995000) {
     res.render("amount", { error: true});
