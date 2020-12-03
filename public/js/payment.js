@@ -33,6 +33,7 @@ form.addEventListener("submit", function(ev) {
     if (result.error) {
       // Show errors from unsuccessul payment
       console.log(result.error.message);
+      window.location.replace("error");
     } else {
       // Payment processed successfully
       if (result.paymentIntent.status === "succeeded") {

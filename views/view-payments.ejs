@@ -2,7 +2,7 @@
 
 <div class="container">
   <% payments.data.forEach(function(payment) { %>
-    <% if (payment.amount_refunded !== payment.amount_captured) { %>
+    <% if (payment.amount_refunded !== payment.amount_captured && payment.status !== "failed") { %>
       <div class="container">
         <form action="/payments/refund" method="post">
           <div class="card">
@@ -18,7 +18,7 @@
           </div>
         </form>
       </div>
-    <% } else { %>
+    <% } else if (payment.status !== "failed") { %>
       <div class="container">
         <div class="card">
           <div class="card-body">
@@ -27,6 +27,19 @@
             <ul class="list-group card-text">
               <li class="list-group-item">Value: £<%- payment.amount / 100 %></li>
               <li class="list-group-item"><b>Customer has been refunded.</b></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% } else if (payment.status === "failed") { %>
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%- payment.billing_details.name %></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%- new Date(payment.created * 1000).toLocaleString() %></h6>
+            <ul class="list-group card-text">
+              <li class="list-group-item">Value: £<%- payment.amount / 100 %></li>
+              <li class="list-group-item text-danger"><b>Payment failed. The customer has not been charged.</b></li>
             </ul>
           </div>
         </div>

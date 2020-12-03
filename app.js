@@ -28,6 +28,10 @@ app.get("/payments/success", function(req, res) {
   res.render("success");
 })
 
+app.get("/payments/error", function(req, res) {
+  res.render("error");
+})
+
 app.get("/payments/view", async(req, res) => {
   const charges = await stripe.charges.list({
     limit: 25,
