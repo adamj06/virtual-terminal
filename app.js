@@ -79,6 +79,17 @@ app.get("/products/view", async(req, res) => {
   res.render("view-products", { products: products, prices: prices });
 })
 
+app.get("/products/view/:productID", async(req, res) => {
+  const product = await stripe.products.retrieve(
+    "prod_" + req.params.productID
+  );
+  const prices = await stripe.prices.list({
+    limit: 25,
+    product: "prod_" + req.params.productID
+  });
+  res.render("product-details", { product: product, price: prices });
+})
+
 app.post("/payments/new", async (req, res) => {
   if (req.body.paymentAmount <= 0 || req.body.paymentAmount > 995000) {
     res.render("amount", { error: true});

@@ -1,0 +1,12 @@
+<%- include("partials/header") -%>
+
+<div class="container">
+  <h1>Product Details</h1>
+  <ul class="list-group">
+    <li class="list-group-item"><b>Name:</b> <%- product.name %></li>
+    <li class="list-group-item"><b>Description:</b> <%- product.description %></li>
+    <li class="list-group-item"><b>Price:</b> £<%- price.data[0].unit_amount / 100 %></li>
+  </ul>
+</div>
+
+<%- include("partials/footer") -%>
