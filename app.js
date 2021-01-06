@@ -74,7 +74,7 @@ app.get("/products/view", async(req, res) => {
     limit: 25,
   });
   const prices = await stripe.prices.list({
-    limit: 3,
+    limit: 25,
   });
   res.render("view-products", { products: products, prices: prices });
 })
@@ -104,6 +104,20 @@ app.post("/customers/new", async (req, res) => {
     email: req.body.customerEmail
   });
   res.render("customer-success");
+})
+
+app.post("/products/new", async (req, res) => {
+  const product = await stripe.products.create({
+    name: req.body.productName,
+    description: req.body.productDescription
+  });
+  const price = await stripe.prices.create({
+    unit_amount: Math.ceil(req.body.productPrice * 100),
+    currency: 'gbp',
+    recurring: {interval: 'month'},
+    product: product.id
+  });
+  res.render("product-success");
 })
 
 app.use(function (req, res, next) {

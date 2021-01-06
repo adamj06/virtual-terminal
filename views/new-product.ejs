@@ -1,15 +1,19 @@
 <%- include("partials/header") -%>
 
 <div class="container">
-  <h1>New Customer</h1>
-  <form id="customer-form" method="post">
+  <h1>New Product</h1>
+  <form id="product-form" method="post">
     <div class="form-group">
-      <label for="customerName">Full Name <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" id="customerName" name="customerName" required="true">
+      <label for="productName">Product Name <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" id="productName" name="productName" required="true">
     </div>
     <div class="form-group">
-      <label for="customerEmail">Email <span class="text-danger">*</span></label>
-      <input type="email" class="form-control" id="customerEmail" name="customerEmail" required="true">
+      <label for="productDescription">Description <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" id="productDescription" name="productDescription" required="true">
+    </div>
+    <div class="form-group">
+      <label for="productPrice">Price <span class="text-danger">*</span></label>
+      <input type="number" min="1" max="995000" step="any" class="form-control" id="productPrice" name="productPrice" required="true">
     </div>
     <button type="submit" class="btn btn-primary">Add</button>
   </form>
