@@ -65,6 +65,20 @@ app.get("/customers/view/:customerID", async(req, res) => {
   res.render("customer-details", { customer: customer, paymentMethods: paymentMethods, subscriptions: subscriptions });
 })
 
+app.get("/products/new", function(req, res) {
+  res.render("new-product");
+})
+
+app.get("/products/view", async(req, res) => {
+  const products = await stripe.products.list({
+    limit: 25,
+  });
+  const prices = await stripe.prices.list({
+    limit: 3,
+  });
+  res.render("view-products", { products: products, prices: prices });
+})
+
 app.post("/payments/new", async (req, res) => {
   if (req.body.paymentAmount <= 0 || req.body.paymentAmount > 995000) {
     res.render("amount", { error: true});

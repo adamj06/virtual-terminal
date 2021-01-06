@@ -1,0 +1,22 @@
+<%- include("partials/header") -%>
+
+<div class="container">
+  <% products.data.forEach(function(product) { %>
+    <% prices.data.forEach(function(price) { %>
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%- product.name %></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%- new Date(product.created * 1000).toLocaleString() %></h6>
+            <ul class="list-group card-text">
+              <li class="list-group-item"><b>Price:</b> £<%- price.unit_amount / 100 %></li>
+              <li class="list-group-item"><a class="btn btn-primary" href="/products/view/<%- product.id.substring(4) %>" role="button">View Details</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  <% }) %>
+</div>
+
+<%- include("partials/footer") -%>
