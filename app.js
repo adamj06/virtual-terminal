@@ -65,6 +65,26 @@ app.get("/customers/view/:customerID", async(req, res) => {
   res.render("customer-details", { customer: customer, paymentMethods: paymentMethods, subscriptions: subscriptions });
 })
 
+app.get("/customers/edit/:customerID/add-subscription", async(req, res) => {
+  const products = await stripe.products.list({
+    limit: 25
+  });
+  const prices = await stripe.prices.list({
+    limit: 25,
+  });
+  res.render("customer-subscription", { products: products, prices: prices});
+})
+
+app.post("/customers/edit/:customerID/add-subscription", async(req, res) => {
+  const subscription = await stripe.subscriptions.create({
+    customer: 'cus_' + req.params.customerID,
+    items: [
+      {price: req.body.productSelect},
+    ],
+  });
+  res.redirect("/customers/view/" + req.params.customerID);
+})
+
 app.get("/products/new", function(req, res) {
   res.render("new-product");
 })

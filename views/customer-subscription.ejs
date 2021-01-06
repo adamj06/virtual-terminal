@@ -1,0 +1,20 @@
+<%- include("partials/header") -%>
+
+<div class="container">
+  <h1>Add Subscription</h1>
+  <form id="subscription-form" method="post">
+    <div class="form-group">
+      <label for="productSelect">Product</label>
+      <select name="productSelect" class="form-control" id="productSelect">
+        <% products.data.forEach(function(product, index) { %>
+          <% if (product.active === true) { %>
+            <option value="<%- prices.data[index].id %>"><%- product.name %> | £<%- prices.data[index].unit_amount / 100 %></option>
+          <% } %>
+        <% }) %>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+</div>
+
+<%- include("partials/footer") -%>
