@@ -6,6 +6,7 @@
     <li class="list-group-item"><b>Name:</b> <%- product.name %></li>
     <li class="list-group-item"><b>Description:</b> <%- product.description %></li>
     <li class="list-group-item"><b>Price:</b> £<%- price.data[0].unit_amount / 100 %></li>
+    <li class="list-group-item"><a class="btn btn-primary" href="/products/view/<%- product.id.substring(5) %>/customers" role="button">View Customers</a></li>
   </ul>
 </div>
 

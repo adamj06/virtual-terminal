@@ -84,10 +84,25 @@ app.get("/products/view/:productID", async(req, res) => {
     "prod_" + req.params.productID
   );
   const prices = await stripe.prices.list({
-    limit: 25,
+    limit: 1,
     product: "prod_" + req.params.productID
   });
   res.render("product-details", { product: product, price: prices });
+})
+
+app.get("/products/view/:productID/customers", async(req, res) => {
+  const product = await stripe.products.retrieve(
+    "prod_" + req.params.productID
+  );
+  const prices = await stripe.prices.list({
+    limit: 1,
+    product: "prod_" + req.params.productID
+  });
+  const subscriptions = await stripe.subscriptions.list({
+    limit: 25,
+    price: prices.data[0].id
+  });
+  res.render("product-details-customers", { product: product, price: prices, subscriptions: subscriptions });
 })
 
 app.post("/payments/new", async (req, res) => {

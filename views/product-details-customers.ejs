@@ -1,0 +1,15 @@
+<%- include("partials/header") -%>
+
+<div class="container">
+  <h1>Customer Subscriptions</h1>
+  <% subscriptions.data.forEach(function(subscription) { %>
+    <div class="container">
+      <ul class="list-group">
+        <li class="list-group-item"><b>Customer:</b> <%- subscription.customer %></li>
+        <li class="list-group-item"><a class="btn btn-danger" href="/subscriptions/cancel/<%- subscription.customer %>/<%- product.id %>" role="button">Cancel</a></li>
+      </ul>
+    </div>
+  <% }) %>
+</div>
+
+<%- include("partials/footer") -%>
