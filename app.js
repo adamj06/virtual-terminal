@@ -187,6 +187,13 @@ app.post("/customers/edit/:customerID/delete-method", async (req, res) => {
   res.redirect("/customers/view/" + req.params.customerID);
 })
 
+app.post("/customers/edit/:customerID/cancel-subscription", async (req, res) => {
+  const deleted = await stripe.subscriptions.del(
+    req.body.cancelSubscription
+  );
+  res.redirect("/customers/view/" + req.params.customerID);
+})
+
 app.post("/products/new", async (req, res) => {
   const product = await stripe.products.create({
     name: req.body.productName,

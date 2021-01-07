@@ -33,6 +33,7 @@
       <% }) %>
       <a class="btn btn-primary" href="/customers/edit/<%- customer.id.substring(4) %>/add-payment-method" role="button">New Payment Method</a>
     </li>
+    <form id="cancelSubscription" action="/customers/edit/<%- customer.id.substring(4) %>/cancel-subscription" method="post"></form>
     <li class="list-group-item">
       <% if (paymentMethods.data.length !== 0) { %>
         <b>Subscriptions:</b>
@@ -41,7 +42,7 @@
         <div class="container">
           <ul class="list-group">
             <li class="list-group-item"><b>Amount:</b> £<%- subscription.items.data[0].price.unit_amount / 100 %></li>
-            <li class="list-group-item"><button name="cancelSubscription" type="submit" class="btn btn-danger" value="<%- subscription.id %>">Cancel</button></li>
+            <li class="list-group-item"><button form="cancelSubscription" name="cancelSubscription" type="submit" class="btn btn-danger" value="<%- subscription.id %>">Cancel</button></li>
           </ul>
         </div>
       <% }) %>
