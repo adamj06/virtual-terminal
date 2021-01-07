@@ -7,7 +7,11 @@
         <form action="/payments/refund" method="post">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title"><%- payment.billing_details.name %></h5>
+              <% if (!payment.billing_details.name) { %>
+                <h5 class="card-title"><%- payment.customer %></h5>
+              <% } else { %>
+                <h5 class="card-title"><%- payment.billing_details.name %></h5>
+              <% } %>
               <h6 class="card-subtitle mb-2 text-muted"><%- new Date(payment.created * 1000).toLocaleString() %></h6>
               <ul class="list-group card-text">
                 <li class="list-group-item">Value: £<%- payment.amount / 100 %></li>
@@ -22,7 +26,11 @@
       <div class="container">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title"><%- payment.billing_details.name %></h5>
+            <% if (!payment.billing_details.name) { %>
+              <h5 class="card-title"><%- payment.customer %></h5>
+            <% } else { %>
+              <h5 class="card-title"><%- payment.billing_details.name %></h5>
+            <% } %>
             <h6 class="card-subtitle mb-2 text-muted"><%- new Date(payment.created * 1000).toLocaleString() %></h6>
             <ul class="list-group card-text">
               <li class="list-group-item">Value: £<%- payment.amount / 100 %></li>
@@ -35,7 +43,11 @@
       <div class="container">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title"><%- payment.billing_details.name %></h5>
+            <% if (!payment.billing_details.name) { %>
+              <h5 class="card-title"><%- payment.customer %></h5>
+            <% } else { %>
+              <h5 class="card-title"><%- payment.billing_details.name %></h5>
+            <% } %>
             <h6 class="card-subtitle mb-2 text-muted"><%- new Date(payment.created * 1000).toLocaleString() %></h6>
             <ul class="list-group card-text">
               <li class="list-group-item">Value: £<%- payment.amount / 100 %></li>
