@@ -172,6 +172,21 @@ app.post("/customers/new", async (req, res) => {
   res.render("customer-success");
 })
 
+app.post("/customers/edit/:customerID/default-method", async (req, res) => {
+  const customer = await stripe.customers.update(
+    "cus_" + req.params.customerID,
+    {invoice_settings: {default_payment_method: req.body.makeDefault}}
+  );
+  res.redirect("/customers/view/" + req.params.customerID);
+})
+
+app.post("/customers/edit/:customerID/delete-method", async (req, res) => {
+  const paymentMethod = await stripe.paymentMethods.detach(
+    req.body.deletePaymentMethod
+  );
+  res.redirect("/customers/view/" + req.params.customerID);
+})
+
 app.post("/products/new", async (req, res) => {
   const product = await stripe.products.create({
     name: req.body.productName,
