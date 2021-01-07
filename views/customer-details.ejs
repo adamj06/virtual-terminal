@@ -2,6 +2,8 @@
 
 <div class="container">
   <h1>Customer Details</h1>
+  <form id="default" action="/default-method" method="post"></form>
+  <form id="delete" action="/delete-method" method="post"></form>
   <ul class="list-group">
     <li class="list-group-item"><b>Name:</b> <%- customer.name %></li>
     <li class="list-group-item"><b>Email:</b> <%- customer.email %></li>
@@ -14,6 +16,7 @@
           <ul class="list-group">
             <li class="list-group-item"><b>Card Brand:</b> <%- paymentMethod.card.brand %></li>
             <li class="list-group-item"><b>Card Number:</b> **** **** **** <%- paymentMethod.card.last4 %></li>
+            <li class="list-group-item"><button form="default" name="makeDefault" type="submit" class="btn btn-primary" value="<%- paymentMethod.id %>">Make Default</button><button form="delete" name="deletePaymentMethod" type="submit" class="btn btn-danger" value="<%- paymentMethod.id %>">Delete</button></li>
           </ul>
         </div>
       <% }) %>
