@@ -75,6 +75,26 @@ app.get("/customers/edit/:customerID/add-subscription", async(req, res) => {
   res.render("customer-subscription", { products: products, prices: prices});
 })
 
+app.get("/customers/edit/:customerID/add-payment-method", async(req, res) => {
+  const products = await stripe.products.list({
+    limit: 25
+  });
+  const prices = await stripe.prices.list({
+    limit: 25,
+  });
+  res.render("customer-payment-method", { products: products, prices: prices, customerID: req.params.customerID});
+})
+
+app.get("/customers/edit/:customerID/add-payment-method/attach/:paymentMethod", async(req, res) => {
+  const paymentMethod = await stripe.paymentMethods.attach(
+    req.params.paymentMethod,
+    {customer: "cus_" + req.params.customerID}
+  );
+  if(paymentMethod){
+    res.redirect("/customers/view/" + req.params.customerID);
+  }
+})
+
 app.post("/customers/edit/:customerID/add-subscription", async(req, res) => {
   const subscription = await stripe.subscriptions.create({
     customer: 'cus_' + req.params.customerID,
